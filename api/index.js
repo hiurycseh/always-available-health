@@ -1,6 +1,23 @@
 import server from '../dist/server/server.js';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 export default async (req, res) => {
+  // Serve static assets directly
+  if (req.url.startsWith('/assets/')) {
+    try {
+      const filePath = join(process.cwd(), 'public', req.url);
+      const file = readFileSync(filePath);
+      res.setHeader('content-type', 'application/octet-stream');
+      res.end(file);
+      return;
+    } catch (e) {
+      res.statusCode = 404;
+      res.end('Not Found');
+      return;
+    }
+  }
+
   try {
     // Convert Node.js req to Fetch API Request
     const url = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers['x-forwarded-host'] || req.headers.host}${req.url}`;

@@ -1,9 +1,3 @@
 {
-  "outputDirectory": "public",
-  "rewrites": [
-    {
-      "source": "/(?!assets|_next|static).*",
-      "destination": "/api"
-    }
-  ]
+  "outputDirectory": "public"
 }

@@ -1,9 +1,7 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "tanstack-start",
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "outputDirectory": "dist/client",
+  "framework": "vite"
 }
+
 

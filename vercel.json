@@ -1,7 +1,4 @@
 {
+  "public": "public",
   "buildCommand": "npm run build"
 }
-
-
-
-

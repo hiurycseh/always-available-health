@@ -1,4 +1,12 @@
 {
-  "buildCommand": "npm run build",
-  "public": "dist/client"
+  "buildCommand": "npm run build && cp -r dist/client/assets public/assets",
+  "public": "public",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
+
+

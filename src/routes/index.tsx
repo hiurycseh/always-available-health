@@ -1,31 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroBg from "@/assets/hero-bg.jpg";
-import quarto1 from "@/assets/real-quarto1.jpg";
-import quarto2 from "@/assets/real-quarto2.jpg";
-import sala from "@/assets/real-sala.jpg";
-import refeitorio from "@/assets/real-refeitorio.jpg";
-import cozinha from "@/assets/real-cozinha.jpg";
-import alimentacao from "@/assets/real-alimentacao.jpg";
-import piscina1 from "@/assets/real-piscina1.jpg";
-import piscina2 from "@/assets/real-piscina2.jpg";
-import academia1 from "@/assets/real-academia1.jpg";
-import academia2 from "@/assets/real-academia2.jpg";
-import recepcao from "@/assets/real-recepcao.jpg";
-import areaExterna from "@/assets/real-area-externa.jpg";
 
 const GALLERY = [
-  { img: recepcao, title: "Recepção", desc: "Hall de entrada amplo" },
-  { img: quarto1, title: "Quartos", desc: "Acomodação com ar e TV" },
-  { img: quarto2, title: "Dormitório Individual", desc: "Conforto e privacidade" },
-  { img: sala, title: "Sala de Convivência", desc: "Espaço para descanso" },
-  { img: refeitorio, title: "Refeitório", desc: "Área ampla e arejada" },
-  { img: cozinha, title: "Cozinha", desc: "Estrutura completa" },
-  { img: alimentacao, title: "Alimentação", desc: "Refeições balanceadas" },
-  { img: piscina1, title: "Piscina", desc: "Área de lazer ao ar livre" },
-  { img: piscina2, title: "Área de Piscina", desc: "Espaço de descanso" },
-  { img: areaExterna, title: "Área Externa", desc: "Jardim e lazer" },
-  { img: academia1, title: "Academia", desc: "Equipamentos completos" },
-  { img: academia2, title: "Espaço Fitness", desc: "Estrutura ampla" },
+  { img: "/assets/real-recepcao.jpg", title: "Recepção", desc: "Hall de entrada amplo" },
+  { img: "/assets/real-quarto1.jpg", title: "Quartos", desc: "Acomodação com ar e TV" },
+  { img: "/assets/real-quarto2.jpg", title: "Dormitório Individual", desc: "Conforto e privacidade" },
+  { img: "/assets/real-sala.jpg", title: "Sala de Convivência", desc: "Espaço para descanso" },
+  { img: "/assets/real-refeitorio.jpg", title: "Refeitório", desc: "Área ampla e arejada" },
+  { img: "/assets/real-cozinha.jpg", title: "Cozinha", desc: "Estrutura completa" },
+  { img: "/assets/real-alimentacao.jpg", title: "Alimentação", desc: "Refeições balanceadas" },
+  { img: "/assets/real-piscina1.jpg", title: "Piscina", desc: "Área de lazer ao ar livre" },
+  { img: "/assets/real-piscina2.jpg", title: "Área de Piscina", desc: "Espaço de descanso" },
+  { img: "/assets/real-area-externa.jpg", title: "Área Externa", desc: "Jardim e lazer" },
+  { img: "/assets/real-academia1.jpg", title: "Academia", desc: "Equipamentos completos" },
+  { img: "/assets/real-academia2.jpg", title: "Espaço Fitness", desc: "Estrutura ampla" },
 ];
 
 export const Route = createFileRoute("/")({
@@ -159,7 +146,7 @@ function Index() {
         </a>
       </nav>
 
-      <section className="hero" style={{ backgroundImage: `url(${heroBg})` }}>
+      <section className="hero" style={{ backgroundImage: `url(/assets/hero-bg.jpg)` }}>
         <div className="hero-overlay" />
         <div className="hero-content">
           <div className="hero-tags">

@@ -1,14 +1,9 @@
 {
   "outputDirectory": "public",
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/assets/.*",
-      "dest": "/assets/$1",
-      "status": 200
-    },
-    {
-      "src": "^/(?!assets).*$",
-      "dest": "/api"
+      "source": "/(?!assets|_next|static).*",
+      "destination": "/api"
     }
   ]
 }

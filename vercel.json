@@ -1,14 +1,21 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/client",
-  "framework": "vite",
+  "outputDirectory": "dist/server",
+  "framework": "node",
+  "functions": {
+    "server.mjs": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/server.mjs"
     }
   ]
 }
+
+
 
 
 

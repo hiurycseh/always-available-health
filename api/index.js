@@ -1,27 +1,59 @@
-export default async function handler(req, res) {
-  try {
-    const { default: server } = await import('../dist/server/server.js');
+import { createServer } from 'http';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-    const url = new URL(req.url, `https://${req.headers.host}`);
-    const request = new Request(url, {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+let handler;
+
+async function getHandler() {
+  if (!handler) {
+    try {
+      const serverModule = await import(join(__dirname, '..', 'dist', 'server', 'server.js'));
+      handler = serverModule.default;
+    } catch (err) {
+      console.error('Failed to load server:', err);
+      throw err;
+    }
+  }
+  return handler;
+}
+
+export default async (req, res) => {
+  try {
+    const server = await getHandler();
+
+    const protocol = req.headers['x-forwarded-proto'] || 'https';
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const url = new URL(req.url || '/', `${protocol}://${host}`);
+
+    // Create a Fetch API Request
+    const request = new Request(url.toString(), {
       method: req.method,
       headers: req.headers,
+      ...(req.method !== 'GET' && req.method !== 'HEAD' && req.body ? { body: req.body } : {}),
     });
 
-    const response = await server.fetch(request);
+    // Get response from server
+    const response = await server.fetch(request, {}, {});
 
-    res.setHeader('Content-Type', response.headers.get('content-type') || 'text/html');
+    // Copy status
     res.status(response.status);
 
+    // Copy headers
     response.headers.forEach((value, name) => {
-      if (name.toLowerCase() !== 'content-encoding') {
+      // Skip hop-by-hop headers
+      if (!['connection', 'keep-alive', 'transfer-encoding', 'upgrade'].includes(name.toLowerCase())) {
         res.setHeader(name, value);
       }
     });
 
-    res.end(await response.text());
+    // Send body
+    const text = await response.text();
+    res.send(text);
   } catch (error) {
-    console.error(error);
-    res.status(500).end('Server error');
+    console.error('Handler error:', error);
+    res.status(500).send('Internal Server Error');
   }
-}
+};
+
